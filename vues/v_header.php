@@ -27,17 +27,86 @@
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold" href="index.php?uc=accueil">Accueil</a>
                         </li>
+                        <?php if (isset($_SESSION['habilitation']) && ($_SESSION['habilitation'] == 1 || $_SESSION['habilitation'] == 2 || $_SESSION['habilitation'] == 3)) { ?>
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold" href="index.php?uc=medicaments&action=formulairemedoc">Médicaments</a>
                         </li>
-                       
-                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold dropdown-toggle" href="#" id="rapportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Rapports
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rapportsDropdown">
+                                <!-- Section : Mes rapports (Visiteur et Délégué) -->
+                                <?php if (isset($_SESSION['habilitation']) && ($_SESSION['habilitation'] == 1 || $_SESSION['habilitation'] == 2)) { ?>
+                                    <li><h6 class="dropdown-header">Mes rapports</h6></li>
+                                    <li>
+                                        <a class="dropdown-item" href="index.php?uc=rapports&action=nouveau">
+                                            Saisir
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="index.php?uc=rapports&action=consulter">
+                                            Consulter
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                                
+                                
+                                <!-- Section : Gestion (Délégué Régional) -->
+                                 <?php if (isset($_SESSION['habilitation']) && $_SESSION['habilitation'] == 2) { ?>
+                                    <li><h6 class="dropdown-header">Ma région</h6></li>
+                                    <li>
+                                        <a class="dropdown-item" href="index.php?uc=rapports&action=nouveaux">
+                                            Nouveaux rapports
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="index.php?uc=rapports&action=historiqueRegion">
+                                            Historique
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                                
+                                <!-- Section : Gestion (Responsable Secteur) -->
+                                <?php if (isset($_SESSION['habilitation']) && $_SESSION['habilitation'] == 3) { ?>
+                                    <li><h6 class="dropdown-header">Mon secteur</h6></li>
+                                    <li>
+                                        <a class="dropdown-item" href="index.php?uc=rapports&action=nouveaux">
+                                            Nouveaux rapports
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="index.php?uc=rapports&action=historiqueRegion">
+                                            Historique
+                                        </a>
+                                    </li>
+
+                                <?php } ?>
+                            </ul>
+                        </li>
+                        <?php } ?>
+                        <?php if (isset($_SESSION['habilitation']) && ($_SESSION['habilitation'] == 1 || $_SESSION['habilitation'] == 2 || $_SESSION['habilitation'] == 3)) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold" href="index.php?uc=praticiens&action=selection">Praticiens</a>
+                        </li>
+                        <?php } ?>
+                        <?php if (isset($_SESSION['habilitation']) && $_SESSION['habilitation'] == 3) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold" href="index.php?uc=rapports&action=statistiques">Statistiques</a>
+                        </li>
+                        <?php } ?>
+                        <?php if (isset($_SESSION['login'])) { ?>
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold" href="index.php?uc=connexion&action=profil">Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold" href="index.php?uc=connexion&action=deconnexion" onclick="return confirm('Voulez-vous vraiment vous déconnecter ?');">Déconnexion</a>
+                            <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold" href="index.php?uc=connexion&action=deconnexion">Déconnexion</a>
                         </li>
+                        <?php } else { ?>
+                        <li class="nav-item ">
+                            <a class="nav-link btn-outline-info rounded-pill px-3 fw-bold" href="index.php?uc=connexion&action=connexion">Se connecter</a>
+                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
